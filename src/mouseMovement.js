@@ -11,6 +11,9 @@ const camera = new THREE.PerspectiveCamera(
 );
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
+
+// DPR should be set less than 2 or 2 because on mobile and laptop  screen it is not going to make much difference but it will consume more battery and power
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 document.body.appendChild(renderer.domElement);
 
 // Resize handling
@@ -47,7 +50,7 @@ function animate() {
   requestAnimationFrame(animate);
   cube.rotation.y += 0.001;
   controls.update();
-  cube.lookAt(new THREE.Vector3(mouse.x - 0.5, -mouse.y + 0.5, .2));
+  cube.lookAt(new THREE.Vector3(mouse.x - 0.5, -mouse.y + 0.5, 0.2));
   renderer.render(scene, camera);
 }
 animate();
